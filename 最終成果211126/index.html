@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css"> 
+
+  <script src="js/jquery-2.1.4.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
+ 
+  
+  <title>Bootstrap</title>
+</head>
+
+<script>
+    var url = 'http://127.0.0.1:5000/login';
+    var data = {username: "abc",password: "123456"};
+    
+    var acc_token =' ';
+    fetch(url, {
+      method: 'POST', // or 'PUT'
+      body: JSON.stringify(data), // data can be `string` or {object}!
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        
+      }),
+      
+    }).then(res => res.json())
+    /*.then(data => {
+          /*接到request data後要做的事情*/
+   /*       this.setState({repoName: data[0]['access_token']});
+    })*/
+    
+    .catch(error => console.error('Error:', error))
+    .then(response => {
+    console.log('Success:', response['access_token']);
+    window.localStorage.setItem("MyKeyName", response['access_token'])});
+    //acc_token=response['access_token'];
+    //console.log(acc_token)})
+    //.then( console.log(res));
+    //console.log(acc_token)
+    var value1 = window.localStorage.getItem("MyKeyName");
+
+    console.log('Bearer '+ value1);
+
+
+    $(document).ready(function() {
+      $('#myTable').DataTable( {
+        // 在初始表格的左上有個可選擇的每頁列數的選單設定
+        lengthChange: true,   // 呈現選單
+        lengthMenu: [5, 10, 25, 50],   // 選單值設定
+        pageLength: 25,   // 不用選單設定也可改用固定每頁列數
+        
+        searching: true,   // 搜索功能
+        ordering: true,   // 開啟排序
+        
+        // 下列 2 個一起用，就可以設定列出全部資料、可滑動又固定尺寸的表格
+        paging: false,   // 是否建立分頁
+        scrollY: 400,   // 固定可以上下滑動的高度
+        
+        // [指定的列 , 排序方向] 。
+        // 預設 [[0, 'asc']] ，asc 升冪排列、desc 降冪排列。
+        order: [[ 1, 'asc' ], [ 2, 'asc' ]],
+        
+        // 鎖定行
+        columnDefs: [{
+          targets: [3],
+          // 禁止排序
+          orderable: false,
+        }]
+      } );
+    } );   
+
+    $(document).ready(function() {
+      $('#example').DataTable( {
+        "searching": false, //搜尋功能, 預設是開啟
+        "paging": false, //分頁功能, 預設是開啟
+        "ordering": false, //排序功能, 預設是開啟
+        
+        "language": {
+          "lengthMenu": "顯示 _MENU_ 項結果",
+          "zeroRecords": "沒有符合的結果",
+          "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+          "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+          "search": "搜尋:"
+        },
+        
+        "processing": true,
+        "serverSide": false,
+        "ajax": {
+            "url": "http://127.0.0.1:5000/users",
+            "type": "GET",
+            headers: {"Authorization": 'Bearer '+ localStorage.getItem('MyKeyName')},
+            "error": function(){
+            console.log("資料取得失敗 回去檢討檢討")
+        } //失敗事件
+        },
+        "columns": [
+            { "data": "ID" },
+            { "data": "學號" },
+            { "data": "姓名" },
+            { "data": "破關進度" },
+            { "data": "密碼" },
+        ]
+    
+      });
+    });
+
+
+</script>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-header navbar-right">
+			<a href="#" class="navbar-brand" style="color:rgb(255, 212, 71) ;font-size:2vw;" ;>畢業專題遊戲後台</a>
+		</div>
+	  <ul class="nav navbar-nav navbar-right" >
+	    
+	    <li ><a href="./about.html">使用者</a></li>
+	    <li class="active"><a href="./index.html">首頁</a></li>
+      
+	  </ul>
+   </nav>
+  <header class="bgimage">
+    <div class="container-flud">
+      <div class="row">
+         <h1 style="color:#dcb5ee;"></h1>
+      </div>
+    </div>
+  </header> 
+
+  <footer class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class=footer>
+       <p style="margin-left: 1760px;" >Made By Ling</p>
+    </div>
+ </footer>
+
+ <section class ="col-md-3">
+     <div class="col">
+          <ul class="nav nav-pills nav-stacked " >
+            
+            <li class="active"><a href="./index.html">首頁</a></li>
+            <li ><a href="./about.html">使用者</a></li>
+          </ul>
+    </div>
+</section>
+
+<section class ="col-md-9">
+  <div class="a" style="color:#0e76ff;">
+    <div class="row" style="text-align:center">
+
+        
+            
+          <button id="test" name="button" value="cancel" class="btn btn-secondary" style="width:140px;height:50px;" onclick="javascript:location.href='./about.html'" >使用者管理</button>
+        
+    </div>
+
+    
+  
+  </div> 
+  
+   
+</section>
+
+
+
+
+
+<script src="js/bootstrap.min.js"></script>
+<script src="DataTables/datatables.min.js"></script>
+</body>
+</html>
