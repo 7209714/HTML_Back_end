@@ -1,0 +1,95 @@
+.icon {
+  max-width: 150px;
+  margin: 0 auto;
+  display: block;
+}
+
+.services section {
+  text-align: center;
+}
+div.services{
+	padding-top: 70px;
+}
+.bgimage{
+  background-image:
+  url("../images/svt.jpg");
+  background-position: center center;
+  background-size: 774px 512px;
+  height:450px;
+  }
+h1 {
+    position:absolute;
+    font-size: 60px;
+    top:150px;
+    left:1500px
+    }
+.footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color:#000000;;
+      color: #ff93f6;
+		  font-size:1vw;
+
+}
+.col{
+  margin-top:50px;
+  width:300px ;
+  height:100px;
+  margin-left: 70px;
+}
+.a{
+  margin-top:50px;
+  font-size:1vw;
+  color:#dda0dd;
+}
+.smart-green { 
+  margin-left: auto; 
+  margin-right: auto; 
+  max-width: 500px; 
+  background: #F8F8F8;
+  padding: 100px 100px 100px 100px;
+  font: 12px ;
+  color: #666;
+  border-radius: 5px; 
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px; 
+}
+body{
+  font-size:20px;
+}
+.black_overlay{ 
+  display: none; 
+  position: absolute; 
+  top: 0%; 
+  left: 0%; 
+  width: 100%; 
+  height: 100%; 
+  background-color: black; 
+  z-index:1001; 
+  -moz-opacity: 0.8; 
+  opacity:.80; 
+  filter: alpha(opacity=88); 
+} 
+.white_content { 
+  display: none; 
+  position: absolute; 
+  top: 25%; 
+  left: 25%; 
+  width: 55%; 
+  height: 55%; 
+  padding: 20px; 
+  border: 10px solid orange; 
+  background-color: white; 
+  z-index:1002; 
+  overflow: auto; 
+  text-align: center;
+  line-height: 25px;
+  
+} 
+#example {
+  margin: auto;
+  width: 100% !important;
+  
+}
